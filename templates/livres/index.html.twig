@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello LivresController!{% endblock %}
+
+{% block body %}
+<h2> Liste des Livres</h2>
+   <div class="d-flex justify-content-end">
+    <a href="{{url('admin_livre_add')}}" class="btn btn-secondary">Ajouter un nouveau livre</a>
+    </div>
+    <table class="table table-hover">
+    <tr><th>Titre</th>
+    <th>ISBN</th>
+    <th>Editeur</th>
+    <th>Date Edition</th>
+    <th>prix</th>
+    <th>Categorie</th>
+    <th>Action</th>
+    <th></th>
+    <th></th>
+    <tr>
+      {% for livre in livres %}
+      <tr>
+        <td>{{ livre.titre|e }}</td>
+        <td>{{ livre.ISBN|e }}</td>
+        <td>{{ livre.editeur|e }}</td>
+        <td>{{ livre.editedAt|date('d/m/Y') }}</td>
+        <td>{{ livre.prix|e }}</td>
+      <td>
+    {% if livre.Categorie is null %}
+        {{ 'null' }}
+    {% else %}
+        {{ livre.Categorie.libelle }}
+    {% endif %}
+     </td>
+
+        <td><a href="{{url('admin_livres_show',{'id':livre.id})}}" class="btn btn-primary">Voir</a></td>
+        <td><a href="{{url('admin_livres_delete',{'id':livre.id})}}" class="btn btn-danger">Supprimer</a></td>
+        <td><a href="#" class="btn btn-success">Editer</a></td>
+        <tr>
+    {% endfor %}
+{% endblock %}

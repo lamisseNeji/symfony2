@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello LivresController!{% endblock %}
+
+{% block body %}
+   <h1> Détail du livre {{livre.ISBN}}</h1>
+         <img src="{{livre.image}}" alt="image de livre">
+        <h4>Titre : {{ livre.titre|e }}</h4>
+        <h4>Prix :{{ livre.prix|e }}</h4>
+        <h4>Editeur :{{ livre.editedAt|date('d/m/Y') }}</h4>
+        <p>Resumer : {{livre.resumer}}</p>
+        
+{% endblock %}

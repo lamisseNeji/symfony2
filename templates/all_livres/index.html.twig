@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello AllLivresController!{% endblock %}
+
+{% block body %}
+<div class="row">
+{% for livre in livres %}
+  <div class="col-sm-3 mb-4">
+    <div class="card">
+      <img src="{{ livre.image }}" class="card-img-top" alt="..." style="height: 260px; object-fit: cover;">
+      <div class="card-body">
+        <h5 class="card-title">{{ livre.titre | capitalize }}</h5>
+        <p class="card-text">{{ livre.prix }} DT </br>Catégorie : {{ livre.Categorie.libelle }}</p>
+        <div class="card-body">
+
+         
+
+          <button onclick="window.location='{{url('panier_ajouter',{'id':livre.id})}}'" class="btn btn-success">Ajouter au panier</button>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endfor %}
+</div>
+{% endblock %}

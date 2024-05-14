@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+
+
+<h2>Articles commandés :</h2>
+
+    
+    {% for ligneCommande in commande.ligneCommandes %}
+      <li>
+            Livre : {{ ligneCommande.livre.titre }} Prix : {{ ligneCommande.livre.prix * ligneCommande.quantite}} (quantité : {{ ligneCommande.quantite }})
+        </li>  
+    {% endfor %}
+
+{% endblock %}

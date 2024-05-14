@@ -1,0 +1,20 @@
+{% extends "base.html.twig" %}
+{% block title %}Detailes LivresController!{% endblock %}
+{% block body %}
+<div class="container mt-3">
+  
+  <div class="row">
+    <div class="col-md-6 mt-4" style="">
+      <img src="{{livre.image }}" width="400" height="400">
+    </div>
+    <div class="col-md-6"><br><br>
+    <h2 style="color:#4D2DB7">{{livre.titre | capitalize}}</h2><br>
+      <p><strong style="font-size:20px;color:#4D2DB7">Editeur :</strong> {{livre.editeur}}</p>
+      <p><strong style="font-size:20px;color:#4D2DB7">Prix :</strong> {{livre.prix}} DT</p>
+      <p><strong style="font-size:20px;color:#4D2DB7">Gatégorie :</strong> {{livre.Categorie.libelle}} DT</p>
+      <p><strong style="font-size:20px;color:#4D2DB7">Date d'édition :</strong> {{livre.editedAt|date('d/m/Y')}}</p>
+      <p><strong style="font-size:20px;color:#4D2DB7">Resumer :</strong> {{livre.resumer}} </p>
+    </div>
+  </div>
+</div>
+{% endblock %}

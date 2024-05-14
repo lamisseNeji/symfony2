@@ -1,0 +1,82 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<h1>Mon panier</h1>
+
+{% if app.flashes('error') %}
+    <div class="alert alert-danger">
+        {% for message in app.flashes('error') %}
+            {{ message }}
+        {% endfor %}
+    </div>
+{% endif %}
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-body">
+                <table class="table">
+                    <tr>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                    {% for lignePanier in panier.lignePaniers %}
+                        <tr>
+                            <td>
+                                <img src="{{ lignePanier.getLivre().image }}" width="100" height="100">
+                            </td>
+                             <td>{{ lignePanier.livre.titre }} DT</td>
+                            <td>
+                                <form method="post" action="{{ path('panier_ajouter', {'id': lignePanier.livre.id}) }}" style="display: inline-block;">
+                                    <button type="submit" class="btn btn-light"> + </button>
+                                </form>
+                                {{ lignePanier.quantite }}
+                                <form method="post" action="{{ path('panier_retirer', {'id': lignePanier.livre.id}) }}" style="display: inline-block;">
+                                    <button type="submit" class="btn btn-light"> - </button>
+                                </form>
+                            </td>
+                            <td>{{ lignePanier.livre.prix * lignePanier.quantite }} DT</td>
+                            <td>
+                                <button onclick="window.location='{{ url('panier_supprimer', {'id': lignePanier.livre.id }) }}'">
+                                    <img src="{{ asset('assets/images/delete.jpg ')}}" width="30" height="30">
+                                </button>
+                            </td>
+                             
+                        </tr>
+                    {% endfor %}
+                </table>
+               
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-4 offset-sm-1" >
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title text-center text-black">Récapitulatif de la commande</h5>
+                <h5 class="card-subtitle mb-2 text-muted">Prix d'achats : {{ total }} DT</h5>
+                <h5 class="card-subtitle mb-2 text-muted">Prix de livraison : 4 DT</h5>
+                <h3 class="card-text text-black">Total : {{ total + 4 }} DT</h3>
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+ <a href="{{url('valider_commande')}}"><button class="btn btn-light" >Passer commande</button></a>
+    </div>
+  </div>
+</div>
+<br><br><br>
+
+
+</div>
+</div>
+
+<a href="{{ path('app_all_livres') }}">
+    <h6>< Continuer mes achats</h6>
+</a>
+
+{% endblock %}
+ 

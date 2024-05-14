@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello CategoriesController!{% endblock %}
+
+{% block body %}
+<h1>Liste des Categories</h1>
+
+   <div class="d-flex justify-content-end">
+    <a href="{{url('admin_categories_create')}}" class="btn btn-secondary">Ajouter une nouvelle Gategorie</a>
+    </div>
+    <table class="table table-hover">
+    <tr><th>Libelle</th>
+    <th>Description</th>
+    <th>Action</th>
+    <th></th>
+    <tr>
+      {% for cat in categorie %}
+      <tr>
+        <td>{{cat.libelle|e}}</td>
+        <td>{{cat.description|e }}</td>
+        <td><a href="{{url('admin_categories_delete',{'id':cat.id})}}" class="btn btn-danger">Supprimer</a></td>
+        <td><a href="{{url('admin_categories_update',{'id':cat.id})}}" class="btn btn-success">Editer</a></td>
+        <tr>
+    {% endfor %}
+{% endblock %}
