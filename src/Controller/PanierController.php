@@ -84,7 +84,7 @@ class PanierController extends AbstractController
                 $panier->removeLignePanier($lignePanier);
                 $manager->remove($lignePanier);
             } else {
-                $this->addFlash('error', 'La quantité ne peut pas être négative.');
+                $this->addFlash('error', '.');
             }
 
             $manager->flush();
@@ -139,11 +139,11 @@ public function delete(int $id, LivresRepository $livRep, PanierRepository $pani
         $manager->persist($panier);
         $manager->flush();
     } else {
-        // Si la ligne du panier n'est pas trouvée, générer une exception
+       
         throw $this->createNotFoundException('Le livre avec l\'identifiant '.$id.' n\'a pas été trouvé dans le panier.');
     }
 
-    // Rediriger vers la page du panier
+
     return $this->redirectToRoute('panier_afficher');
 }
 #[Route('/panier/tout/delete', name: 'supprimer_tout_panier')]

@@ -1,16 +1,41 @@
 {% extends 'base.html.twig' %}
 
-
 {% block body %}
+<div class="container">
+    <h2 class="mb-4">Articles commandés :</h2>
 
-
-<h2>Articles commandés :</h2>
-
-    
-    {% for ligneCommande in commande.ligneCommandes %}
-      <li>
-            Livre : {{ ligneCommande.livre.titre }} Prix : {{ ligneCommande.livre.prix * ligneCommande.quantite}} (quantité : {{ ligneCommande.quantite }})
-        </li>  
-    {% endfor %}
-
+    <div class="row">
+        <div class="col">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Titre</th>
+                        <th scope="col">Prix unitaire</th>
+                        <th scope="col">Quantité</th>
+                        <th scope="col">Sous-total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% set total = 0 %}
+                    {% for ligneCommande in commande.ligneCommandes %}
+                    <tr>
+                        <td>{{ ligneCommande.livre.titre }}</td>
+                        <td>{{ ligneCommande.livre.prix }}</td>
+                        <td>{{ ligneCommande.quantite }}</td>
+                        <td>{{ ligneCommande.livre.prix * ligneCommande.quantite }}</td>
+                    </tr>
+                    {% set total = total + (ligneCommande.livre.prix * ligneCommande.quantite) %}
+                    {% endfor %}
+                    <tr>
+                        <td colspan="3" class="text-right"><strong>Total :</strong></td>
+                        <td>{{ total }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col">
+            <a href="{{ path('checkout', {'total': total}) }}" class="btn btn-primary">Payer</a>
+        </div>
+    </div>
+</div>
 {% endblock %}
